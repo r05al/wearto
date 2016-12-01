@@ -1,0 +1,16 @@
+export const UPDATE_DATE = "UPDATE_DATE"
+export const SET_LOOK = "SET_LOOK"
+export const DESELECT_ITEM = "DESELECT_ITEM"
+
+export const TOGGLE_LIST = "TOGGLE_LIST"
+export const SELECT_ITEM = "SELECT_ITEM"
+export const TOGGLE_ITEM = "TOGGLE_ITEM"
+
+export const CREATE_DRAFT = "CREATE_DRAFT"
+export const UPDATE_DRAFT = "UPDATE_DRAFT"
+export const ADD_CLOTHING_ITEM = "ADD_CLOTHING_ITEM"
+export const UPDATE_CLOTHING_ITEM = "UPDATE_CLOTHING_ITEM"
+
+export const UPDATE_LOOK_DRAFT = "UPDATE_LOOK_DRAFT"
+export const ADD_LOOK = "ADD_LOOK"
+export const UPDATE_LOOK = "UPDATE_LOOK"

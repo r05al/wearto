@@ -1,0 +1,402 @@
+* {
+  min-height: 0;
+  min-width: 0;
+}
+
+html, body, #root {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+div {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'proxima-nova','Helvetica Neue',Arial,Helvetica,sans-serif;
+	font-weight: 200;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+@media (min-width: 500px) and (max-width: 600px) {
+  body {
+    background-color: fuchsia;
+  }
+}
+
+.look, .packing-list {
+	padding: 80px 50px;
+	position: relative;
+	height: 76%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.look-flex {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+}
+
+.look-grid {
+	flex: 1;
+}
+
+.selection-lists {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.list {
+	position: relative;
+	width: 100%;
+	background-color: blue;
+	background-size: cover;
+	border-top: black solid 4px;
+	box-shadow: inset 0 0 6em black;
+	overflow: hidden;
+}
+
+.list-title {
+	box-sizing: border-box;
+	font-weight: 600;
+	color: white;
+	text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
+	width: 100%;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.list-title:before {
+	content: "▷";
+}
+
+.list-title--is-open:before {
+	content: "▽";
+}
+
+.list-title--is-open {
+	border-bottom: black solid;
+}
+
+
+.toggle-enter {
+  max-height: 0;
+  overflow: hidden;
+}
+.toggle-enter.toggle-enter-active {
+  max-height: 400px;
+  overflow: hidden;
+  transition: max-height .5s ease-in;
+}
+.toggle-leave {
+  max-height: 400px;
+  overflow: hidden;
+}
+.toggle-leave.toggle-leave-active {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease-out;
+}
+
+.clothing {
+	display: inline-flex;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.item, .clothing {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  overflow: auto;
+  border: 1px solid #e5e5df;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.item.big {
+  position: absolute;
+  width: 450px;
+  height: 250px;
+  margin: auto;
+  padding: 15px;
+  top: 0; left: 0; bottom: 100px; right: 0;
+  z-index: 3;
+}
+
+.item.big input[type=text], textarea {
+  width : 100%;
+  margin: 3px 0;
+  font-size: 13px;
+  border: none;
+}
+
+.item.big input[type=text] {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.item.big input[type=text]:focus,
+.item.big textarea:focus {
+  outline: dashed thin #999;
+  outline-offset: 2px;
+}
+
+.item.big label {
+  margin: 3px 0 7px 3px;
+  color: #a7a7a7;
+  display: inline-block;
+  width: 60px;
+}
+
+.actions {
+	position: absolute;
+	bottom: 12px;
+	right: 12px;
+  margin-top: 10px;
+  text-align: right;
+}
+
+.item.big button {
+  font-size:14px;
+  padding: 8px;
+}
+
+.item-edit{
+  position: absolute;
+  top:10px;
+  right: 10px;
+  opacity: 0;
+  transition: opacity .25s ease-in;
+}
+
+.item-toggle{
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  opacity: 0;
+  transition: opacity .25s ease-in;
+}
+
+.clothing:hover .item-edit, .clothing:hover .item-toggle{
+  opacity: 1;
+}
+
+.look-edit{
+  position: absolute;
+  top: 80px;
+  right: 40px;
+  opacity: 0;
+  transition: opacity .25s ease-in;
+}
+
+.look-new{
+  position: absolute;
+  top:50px;
+  right: 10px;
+}
+
+.look-description:hover .look-edit{
+	opacity: 1;
+}
+
+.look-description input{
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.look-description textarea{
+  font-size: 1em;
+  text-align: center;
+}
+
+.item-edit a, .look-edit a, a.look-new, .item-toggle{
+	z-index: 2;
+  text-decoration: none;
+  color: #999;
+  font-size: 17px;
+}
+
+.look-edit a, a.look-new{
+	font-size: 4em;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0; bottom: 0; right: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.float-button {
+  position: absolute;
+  height: 56px;
+  width: 56px;
+  z-index: 2;
+  right: 20px;
+  bottom: 180px;
+  background: #34495e;
+  color: white;
+  border-radius: 100%;
+  font-size: 34px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 50px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.add-button {
+  position: absolute;
+  width: 50px;
+  z-index: -1;
+  background: #34495e;
+  color: white;
+  border-radius: 6px;
+  font-size: 18px;
+  line-height: 30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+	right: 0;
+	opacity: 0;
+	bottom: 12px;
+	transition: bottom .5s, opacity .5s, width .5s;
+}
+
+.add-look {
+	width: 60px;
+	opacity: 1;
+	bottom: 106px;
+}
+
+.add-item {
+	width: 60px;
+	opacity: 1;
+	bottom: 65px;
+}
+
+.look .float-button {
+	top: 20px;
+	right: 20px;
+}
+
+.control {
+	color: white;
+	position: absolute;
+	font-size: 2em;	
+	left: 5%;
+	top: 30%;
+	z-index: 1;
+}
+
+.drawer {
+	position: absolute;
+	bottom: -950%;
+	left: 8%;
+	background-color: #424242;
+	height: 950%;
+	width: 84%;
+	transition: ease-in-out .75s;
+	z-index: -1;
+}
+
+.drawer-active {
+	bottom: 0;
+	transition: ease-in-out .75s;
+}
+
+#nav {
+	color: #BDBDBD;
+	position: absolute;
+	left: 5%;
+	top: 36%;
+  width: 36px;
+  height: 50%;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+#nav span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+#nav span:nth-child(1) {
+  top: 0;
+}
+
+#nav span:nth-child(2),#nav span:nth-child(3) {
+  top: 25%;
+}
+
+#nav span:nth-child(4) {
+  top: 50%;
+}
+
+#nav.open span:nth-child(1) {
+  top: 25%;
+  width: 0%;
+  left: 50%;
+}
+
+#nav.open span:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+#nav.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+#nav.open span:nth-child(4) {
+  top: 25%;
+  width: 0%;
+  left: 50%;
+}
+
+#search {
+	position: fixed;
+	color: white;
+	font-size: 4em;
+	transform: rotate(180deg);
+  top: 0;
+	right: 2%;
+	z-index: 2;
+}
+
+.search-options {
+	z-index: -1;
+	display: flex;
+	opacity: 0;
+	width: 100%;
+	top: 0px;
+	position: fixed;
+	align-items: center;
+	background-color: rgba(0,0,0,0.6);
+	padding: 10px;
+	transition: top .25s, opacity .25s linear;
+}
+
+.search-options--is-open {
+	z-index: 2;
+	top: 60px;
+	opacity: 1;
+}
