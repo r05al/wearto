@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ListItem from './ListItem';
 import Slider from 'react-slick';
 import Immutable from 'immutable';
 import { Link } from 'react-router';
@@ -74,13 +75,12 @@ class List extends Component {
 
 		let slider;
 		if (listItems.get(type)) {
-			const itemsOfType = clothingItems
-			.filter((item) => item.get('type') === type)
+			const items = clothingItems
 			.map((item) => {
   			let info, href = item.get('href'),
   				id = item.get('id');
 
-  			if (href.includes('placehold.it')) {
+  			if (href.includes('placehold.it')) { // own HOC
   				info = <span onClick={ this.handleSelect.bind(this, item) }
 			  							 style={{position: 'absolute', left: 0, 
 			  							 				 textAlign: 'center', width: '100%'}}>
@@ -90,24 +90,18 @@ class List extends Component {
 
 	  		return (
 	  			<div className='clothing' key={ id }>
-	  				<div style={{width: '90%', margin: '0 auto'}}>
-		  				<img 
-		  					src={ href }
-							  onClick={ this.handleSelect.bind(this, item) }
-							  style={ item.get('available') ? {} : { filter: 'opacity(50%)' }}
-							  alt=""
-							/>
-							{ info }
-		  				<div className="item-edit"><Link to={`items/${id}/edit`}>✎</Link></div>
-		  				<div className="item-toggle" 
-		  						 onClick={this.handleToggleItem.bind(this, item)}>&#9852;</div>
-
-		  			</div>
+	  				<ListItem 
+							item={item} 
+							info={info}
+							href={href}
+							handleSelect={this.handleSelect.bind(this)}
+							handleToggleItem={this.handleToggleItem.bind(this)}
+						/>
 	  			</div>
 	  		);
 	  	});
 
-		  slider = <Slider {...settings}>{itemsOfType}</Slider>
+		  slider = <Slider {...settings}>{items}</Slider>
 		}
 
     return (
@@ -117,9 +111,10 @@ class List extends Component {
     					`list-title ${type}`} 
     					onClick={this.handleToggle.bind(this)}>
 	      </div>
-    		<ReactCSSTransitionGroup transitionName="toggle"
-    		                         transitionEnterTimeout={500}
-    		                     		 transitionLeaveTimeout={500}>
+    		<ReactCSSTransitionGroup 
+	    		transitionName="toggle"
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={500}>
 		  	{ slider }
 		  	</ReactCSSTransitionGroup>
 	  	</div>

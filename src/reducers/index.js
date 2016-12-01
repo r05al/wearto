@@ -23,3 +23,7 @@ export const getClothingItemIndex = (state, id) =>
 
 export const getLook = (state, id) =>
 	fromLooks.getLook(state, id);
+
+export const getLookItems = state =>
+	state.lookDraft.get('pieces').map(piece =>
+		getClothingItem(state.clothingItems, piece));

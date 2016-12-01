@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import DatePicker from 'react-datepicker';
-import { getClothingItem } from '../reducers';
 
 class LookForm extends Component {
 	static propTypes = {
@@ -31,16 +30,15 @@ class LookForm extends Component {
 	}
 
 	render() {
-		const clothingItems = this.props.clothingItems;
+		const lookDraftItems = this.props.lookDraftItems;
 		const lookDraft = this.props.lookDraft;
-		const selectedPieces = lookDraft.get('pieces')
+		const selectedPieces = lookDraftItems
 			.filter((item) => item );
 
 		const images = selectedPieces.map((piece) => {
-			const item = getClothingItem(clothingItems, piece);
-			return <div key={piece} className="draft-img" 
+			return <div key={piece.get('id')} className="draft-img" 
 									style={{width: '20%'}}>
-							 <img src={item.get('href')} alt="" />
+							 <img src={piece.get('href')} alt="" />
 						 </div>;
 		});
 

@@ -2,10 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import LookForm from '../components/LookForm';
 import { connect } from 'react-redux';
 import { updateLookDraft, updateLook } from '../actions';
+import { getLookItems } from '../reducers';
 
 class EditLook extends Component {
 	static propTypes = {
-		clothingItems: PropTypes.object.isRequired,
+		lookDraftItems: PropTypes.object.isRequired,
 		lookDraft: PropTypes.object.isRequired,
 		updateLookDraft: PropTypes.func.isRequired,
 		updateLook: PropTypes.func.isRequired
@@ -28,7 +29,7 @@ class EditLook extends Component {
 	render() {
 		return (
 			<LookForm 
-				clothingItems={this.props.clothingItems}
+				lookDraftItems={this.props.lookDraftItems}
 				lookDraft={this.props.lookDraft}
 				buttonLabel="Save Look"
 				handleChange={this.handleChange.bind(this)}
@@ -40,7 +41,7 @@ class EditLook extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	clothingItems: state.clothingItems,
+	lookDraftItems: getLookItems(state),
 	lookDraft: state.lookDraft,
 })
 

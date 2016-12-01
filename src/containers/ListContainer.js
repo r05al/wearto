@@ -6,16 +6,22 @@ import { selectItem, toggleItem, toggleList } from '../actions';
 function ListContainer({ clothingItems, listItems, selectItem, toggleItem, toggleList }) {
 	return (
 		<div className="selection-lists">
-			{listItems.keySeq().map(item =>
-				<List 
-					key={item}
-					type={item}
-					clothingItems={clothingItems}
-					listItems={listItems}
-					selectItem={selectItem}
-					toggleItem={toggleItem}
-					toggleList={toggleList} 
-				/>
+			{listItems.keySeq()
+				.map(type => {
+					const itemOfType = clothingItems.filter((item) => 
+						item.get('type') === type);
+					return (
+						<List 
+							key={type}
+							type={type}
+							clothingItems={itemOfType}
+							listItems={listItems}
+							selectItem={selectItem}
+							toggleItem={toggleItem}
+							toggleList={toggleList} 
+						/>
+					);
+				}
 			)}
 		</div>
 	);

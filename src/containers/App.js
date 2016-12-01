@@ -7,12 +7,12 @@ import FilterOptions from '../components/FilterOptions';
 import { connect } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css';
 import { deselect, setLook, updateDate, updateLookDraft } from '../actions'
-import { getLook } from '../reducers';
+import { getLook, getLookItems } from '../reducers';
 
 class App extends Component {
 	static propTypes = {
 		clothingItems: PropTypes.object.isRequired,
-		look: PropTypes.object.isRequired,
+		lookDraft: PropTypes.object.isRequired,
 		looks: PropTypes.object.isRequired,
 		deselect: PropTypes.func.isRequired,
 		setLook: PropTypes.func.isRequired,
@@ -39,19 +39,20 @@ class App extends Component {
 	}
 
 	render() {
-		const { lookDraft, looks, clothingItems } = this.props;
+		const { clothingItems, lookDraft, looks, lookDraftItems } = this.props;
 
 		return(
 			<div>
 				<NavMenu />
 				<Look 
 					lookDraft={lookDraft} 
-					clothingItems={clothingItems} 
+					lookDraftItems={lookDraftItems} 
 					deselect={this.handleDeselect}
 					handleChange={this.handleChange.bind(this)}
 				/>
 				<AddOptions />
-				<FilterOptions 
+				<FilterOptions
+					clothingItems={clothingItems}
 					lookDraft={lookDraft}
 					looks={looks}
 					setLook={this.handleSetLook}
@@ -73,6 +74,7 @@ const mapDispatchToProps = ({
 
 const mapStateToProps = (state) => ({
 	clothingItems: state.clothingItems,
+	lookDraftItems: getLookItems(state),
 	lookDraft: state.lookDraft,
 	looks: state.looks,
 })

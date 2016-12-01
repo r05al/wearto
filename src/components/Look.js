@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Map, List } from 'immutable';
-import { Link } from 'react-router';
-import { getClothingItem } from '../reducers';
+import EditAction from './EditAction';
 
 class Look extends Component {
   static propTypes = {
-    clothingItems: PropTypes.instanceOf(List).isRequired,
+    lookDraftItems: PropTypes.instanceOf(List).isRequired,
     lookDraft: PropTypes.instanceOf(Map).isRequired,
     deselect: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
@@ -16,15 +15,14 @@ class Look extends Component {
   }
 
   render() {
-    const { lookDraft, clothingItems, deselect } = this.props;
+    const { lookDraft, lookDraftItems, deselect } = this.props;
     const id = lookDraft.get('id');
-    const pieces = lookDraft.get('pieces');
-    const types = pieces.keySeq();
+    const types = lookDraft.get('pieces').keySeq();
 
     const lookArray = types.map((type) => {
     	let info, itemInfo;
-      if (pieces.get(type)) {
-        itemInfo = getClothingItem(clothingItems, pieces.get(type));
+      if (lookDraftItems.get(type)) {
+        itemInfo = lookDraftItems.get(type);
       } else {
         itemInfo = Map();
       }
@@ -41,15 +39,10 @@ class Look extends Component {
 						 </div>
     });
 
-    let edit;
-    if (id) {
-    	edit = <div className="look-edit"><Link to={`looks/${id}/edit`}>✎</Link></div>
-    }
-
     return (
       <div className="look">
         <div className="look-description">
-        	{edit}
+        	{id ? <EditAction type="look" id={id}/> : null}
           <input 
             type='text'
             value={lookDraft.get('title')}
