@@ -1,34 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ListItem from './ListItem';
+import { settings } from './ListSlider';
 import Slider from 'react-slick';
 import Immutable from 'immutable';
 import { Link } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
-const navButtonStyle = {
-	position: 'absolute',
-	zIndex: 1,
-	top: '30%',
-	opacity: '.7',
-	cursor: 'pointer',
-	fontSize: '4em'
-}
-
-class LeftNavButton extends Component {
-  render() {
-		let style = Object.assign({}, navButtonStyle, { left: 0 });
-
-    return <span{...this.props} style={style}>&#8249;</span>  
-  }
-}
-
-class RightNavButton extends Component {
-  render() {
-  	let style = Object.assign({}, navButtonStyle, { right: 0 });
-
-    return <span{...this.props} style={style}>&#8250;</span>  
-  }
-}
 
 class List extends Component {
 	static propTypes = {
@@ -62,44 +38,34 @@ class List extends Component {
 
 	render() {
 		const { clothingItems, listItems, type } = this.props;
-		let nextNav = <RightNavButton />;
-		let prevNav = <LeftNavButton />;
-		let settings = {
-			infinite: true,
-			speed: 500,
-			slidesToShow: 7,
-			slidesToScroll: 1,
-			nextArrow: nextNav,
-			prevArrow: prevNav
-		};
 
 		let slider;
 		if (listItems.get(type)) {
 			const items = clothingItems
-			.map((item) => {
-  			let info, href = item.get('href'),
-  				id = item.get('id');
+				.map((item) => {
+	  			let info, href = item.get('href'), 
+	  				id = item.get('id');
 
-  			if (href.includes('placehold.it')) { // own HOC
-  				info = <span onClick={ this.handleSelect.bind(this, item) }
-			  							 style={{position: 'absolute', left: 0, 
-			  							 				 textAlign: 'center', width: '100%'}}>
-			  					{item.get('title')}
-			  				</span>;
-  			}
+	  			if (href.includes('placehold.it')) { // own HOC
+	  				info = <span onClick={ this.handleSelect.bind(this, item) }
+				  							 style={{position: 'absolute', left: 0, 
+				  							 				 textAlign: 'center', width: '100%'}}>
+				  					{item.get('title')}
+				  				 </span>;
+	  			}
 
-	  		return (
-	  			<div className='clothing' key={ id }>
-	  				<ListItem 
-							item={item} 
-							info={info}
-							href={href}
-							handleSelect={this.handleSelect.bind(this)}
-							handleToggleItem={this.handleToggleItem.bind(this)}
-						/>
-	  			</div>
-	  		);
-	  	});
+		  		return (
+		  			<div className='clothing' key={ id }>
+		  				<ListItem 
+								item={item} 
+								info={info}
+								href={href}
+								handleSelect={this.handleSelect.bind(this)}
+								handleToggleItem={this.handleToggleItem.bind(this)}
+							/>
+		  			</div>
+		  		);
+		  	});
 
 		  slider = <Slider {...settings}>{items}</Slider>
 		}
