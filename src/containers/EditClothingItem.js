@@ -48,7 +48,6 @@ class EditClothingItem extends Component {
 const mapStateToProps = (state, ownProps) => (
   {
     draft: state.clothingItemDraft,
-    action: getAction(ownProps.route.path),
     item: getClothingItem(state.clothingItems, ownProps.params.id)
   }
 );
