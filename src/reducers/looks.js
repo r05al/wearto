@@ -5,7 +5,7 @@ import {
 } from '../constants';
 
 const SAVED_LOOKS = fromJS([
-	{
+  {
     'id' : '1',
     'title': 'camo',
     'description': 'Select items and prepare yourself for what\'s coming',
@@ -17,7 +17,7 @@ const SAVED_LOOKS = fromJS([
                 'shoe' : 0
               }
   },
-	{
+  {
     'id' : '2',
     'title': 'casual',
     'description': 'Select items and prepare yourself for what\'s coming',
@@ -28,7 +28,7 @@ const SAVED_LOOKS = fromJS([
                 'pant' : 0,
                 'shoe' : 0
               }
-  },  	
+  },    
   {
     'id' : '3',
     'title': 'formal',
@@ -40,7 +40,43 @@ const SAVED_LOOKS = fromJS([
                 'pant' : 0,
                 'shoe' : 0
               }
-  }
+  },	
+  {
+    'id' : '4',
+    'title': 'camo',
+    'description': 'Select items and prepare yourself for what\'s coming',
+    'date': null,
+    'pieces': {
+                'jacket' : 4028,
+                'shirt' : 0,
+                'pant' : 0,
+                'shoe' : 0
+              }
+  },
+	{
+    'id' : '5',
+    'title': 'casual',
+    'description': 'Select items and prepare yourself for what\'s coming',
+    'date': null,
+    'pieces': {
+                'jacket' : 4018,
+                'shirt' : 0,
+                'pant' : 0,
+                'shoe' : 0
+              }
+  },  	
+  {
+    'id' : '6',
+    'title': 'formal',
+    'description': 'Select items and prepare yourself for what\'s coming',
+    'date': null,
+    'pieces': {
+                'jacket' : 4030,
+                'shirt' : 0,
+                'pant' : 0,
+                'shoe' : 0
+              }
+  },
 ]);
 
 const looks = (state = SAVED_LOOKS, action) => {
