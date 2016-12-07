@@ -1,50 +1,43 @@
-class SearchBar extends React.Component {
+import React, { Component } from 'react';
+
+class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
-  
+
+  handleBlur(e) {
+    const value = this.filterTextInput.value || undefined;
+    this.props.onUserInput(value);
+  }
+
+  handleFocus() {
+    this.props.onUserInput("");
+  }
+
   handleChange() {
     this.props.onUserInput(
-      this.filterTextInput.value,
-      this.inStockOnlyInput.checked
+      this.filterTextInput.value
     );
   }
-  
+
   render() {
     return (
       <form>
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Saved Looks"
           value={this.props.filterText}
           ref={(input) => this.filterTextInput = input}
           onChange={this.handleChange}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
-        <p>
-          <input
-            type="checkbox"
-            checked={this.props.inStockOnly}
-            ref={(input) => this.inStockOnlyInput = input}
-            onChange={this.handleChange}
-          />
-          {' '}
-          Only show products in stock
-        </p>
       </form>
     );
   }
 }
 
-import React, { Component } from 'react';
-
-Class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange() {
-    this.
-  }
-}
+export default SearchBar;
